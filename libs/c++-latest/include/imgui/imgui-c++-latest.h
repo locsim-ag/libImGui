@@ -9,9 +9,9 @@
 
 #include <fmt/core.h>
 
-#include <imgui/imgui.h>
-#include <imgui/imgui_internal.h>
-#include <imgui/misc/cpp/imgui_stdlib.h>
+#include <imgui.h>
+#include <imgui_internal.h>
+#include <misc/cpp/imgui_stdlib.h>
 
 
 /** The c++-latest module of libImGui is intended for wrappers and other conveniences that make
@@ -100,13 +100,13 @@ namespace ImGui {
     private:
 
         int parse_length(std::string_view spec) {
-
-            if (spec.ends_with("em")) {
+            bool ew = spec.ends_with("em");
+            if (ew) {
                 auto value = std::stoi(std::string{spec});
                 return round( GetFontSize() * value );
-            }
-            else
+            } else {
                 return std::stoi(std::string{spec});
+            }
         }
     };
 
