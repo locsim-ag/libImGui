@@ -4,7 +4,7 @@ libImGui_cpp = static_library(
   'libImGui_cpp',
   'src/imgui-c++-latest.cpp',
   include_directories: inc_dir, 
-  cpp_args: ['-std=c++23',],
+  cpp_args: [cpp_std,],
   dependencies: [fmt_dep, imgui_dep,]
   )
 
