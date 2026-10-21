@@ -40,7 +40,7 @@ namespace ImGui {
         static const int AllowTabInput       = ImGuiInputTextFlags_AllowTabInput;
         static const int CtrlEnterForNewLine = ImGuiInputTextFlags_CtrlEnterForNewLine;
         static const int NoHorizontalScroll  = ImGuiInputTextFlags_NoHorizontalScroll;
-        static const int AlwaysInsertMode    = ImGuiInputTextFlags_AlwaysInsertMode;
+        static const int AlwaysInsertMode    = ImGuiInputTextFlags_AlwaysOverwrite;     //  ImGuiInputTextFlags_AlwaysInsertMode;
         static const int ReadOnly            = ImGuiInputTextFlags_ReadOnly;
         static const int Password            = ImGuiInputTextFlags_Password;
         static const int NoUndoRedo          = ImGuiInputTextFlags_NoUndoRedo;
