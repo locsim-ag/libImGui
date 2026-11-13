@@ -91,8 +91,8 @@ namespace ImGui {
             }
             else {
                 ImVec2 extents = { 0, 0 };
-                if (width ) extents.x = parse_length(*width);
-                if (height) extents.y = parse_length(*height);
+                if (width ) extents.x = (float) parse_length(*width);
+                if (height) extents.y = (float) parse_length(*height);
                 return extents;
             }
         }
@@ -103,7 +103,7 @@ namespace ImGui {
             bool ew = spec.ends_with("em");
             if (ew) {
                 auto value = std::stoi(std::string{spec});
-                return round( GetFontSize() * value );
+                return (int) round( GetFontSize() * value );
             } else {
                 return std::stoi(std::string{spec});
             }
@@ -118,20 +118,18 @@ namespace ImGui {
     }
 
     // InputText variants ---------------------------------
-
+        // @todo disambiguate this templates: gcc warns but compiles and links, msvc stops
     /* Using templatized user data type
-    */
     template <typename UserData>
     inline bool InputText(const char *label, char *buffer, size_t b_size, ImGui::InputTextFlags flags = 0,
         int (*callback)(ImGuiInputTextCallbackData*) = nullptr,
         UserData* user_data = nullptr
     ) {
 
-        return ImGui::InputText(label, buffer, b_size, (int)flags, callback, user_data);
+        return ImGui::InputText(label, buffer, b_size, (int)flags, callback, static_cast<void*>(user_data) );
     }
-
+*/
     /* Using templatized user data; label specified as a std::string
-     */
     template <typename UserData>
     inline bool InputText(const std::string& label, char* buffer, size_t b_size, ImGui::InputTextFlags flags = 0,
         int (*callback)(ImGuiInputTextCallbackData*) = nullptr,
@@ -140,7 +138,7 @@ namespace ImGui {
 
         return ImGui::InputText(label.c_str(), buffer, b_size, (int)flags, callback, user_data);
     }
-
+     */
     /* Templatized userdata and label/ID; C array buffer
     */
     template <typename Label, size_t BufferSize, typename UserData>
@@ -148,7 +146,7 @@ namespace ImGui {
         int (*callback)(ImGuiInputTextCallbackData*) = nullptr,
         UserData *user_data = nullptr
     ) {
-
+        //return ImGui::InputText(to_label(label), buffer, BufferSize, (int)flags, callback, user_data);
         return ImGui::InputText(to_label(label), buffer, BufferSize, (int)flags, callback, user_data);
     }
 
